@@ -1,0 +1,16 @@
+[docker]
+  [docker.dockerConfig]
+    enable = true
+    name = "customer-api"
+    registry = 'fabiowso2'
+    tag = 'v1'
+    baseImage = 'wso2/wso2micro-gw:3.0.2'
+    push = false
+    username = "$env{DOCKER_USERNAME}"
+    password = "$env{DOCKER_PASSWORD}"
+  [docker.dockerCopyFiles]
+    enable = true
+    [[docker.dockerCopyFiles.files]]
+        source = '/Users/fabio/Documents/Workshop/customer-api/conf/micro-gw.conf'
+        target = '/home/ballerina/conf/micro-gw.conf'
+        isBallerinaConf = true

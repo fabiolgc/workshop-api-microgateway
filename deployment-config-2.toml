@@ -1,0 +1,37 @@
+[kubernetes]
+  [kubernetes.kubernetesDeployment]
+    enable = true
+    #name = ''
+    #labels = ''
+    replicas = '1'
+    imagePullPolicy = 'IfNotPresent'
+    image = 'fabiowso2/customer-api:v1'
+    env = '{"b7a_log_level": "DEBUG"}'
+    buildImage = 'true'
+    push = 'false'
+    username = "$env{DOCKER_USERNAME}"
+    password = "$env{DOCKER_PASSWORD}"    
+    baseImage = 'wso2/wso2micro-gw:3.0.2'
+    #[kubernetes.kubernetesDeployment.copyFiles]
+    #  enable = false
+    #  [[kubernetes.kubernetesDeployment.copyFiles.files]]
+    #    source = '/Users/rajithroshan/Documents/APIM/demo/trustStores/ballerinaTruststore.p12'
+    #    target = '/ballerina/runtime/bre/security'
+    #    isBallerinaConf = false
+  [kubernetes.kubernetesService]
+    enable = true
+    #name = ''
+    #labels = ''
+    serviceType = 'LoadBalancer'
+    #port = ''
+  [kubernetes.kubernetesConfigMap]
+    enable = true
+    ballerinaConf = '/Users/fabio/Documents/Workshop/customer-api/conf/micro-gw.conf'
+    #[[kubernetes.kubernetesConfigMap.configMaps]]
+    #    name = ''
+    #    mountPath = ''
+    #    readOnly = false
+    #    data = ['']
+
+ 
+  

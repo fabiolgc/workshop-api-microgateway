@@ -1,0 +1,63 @@
+---
+openapi: 3.0.0
+info:
+  description: 'Get information about countries via a RESTful API'
+  version: 2.0.5
+  title: REST Countries
+  contact:
+    email: fabio@wso2.com
+  license:
+    name: Mozilla Public License MPL 2.0
+    url: https://www.mozilla.org/en-US/MPL/2.0/
+tags:
+- name: countries
+  description: The restcountries project has been acquired by apilayer, one of the leading providers of API microservices. We will keep supporting restcountries and providing it as a free solution for developers. We will finance this project fully and have turned off the donations feature.
+  externalDocs:
+    description: DONATE!
+    url: https://restcountries.eu/
+x-wso2-basePath: /countries/v2
+paths:
+  "/all":
+    get:
+      tags:
+      - list
+      summary: Get the list of available countries
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: invalid status value
+      x-wso2-disable-security: true
+      x-wso2-production-endpoints: "#/x-wso2-endpoints/countriesAll"
+  "/name/{name}":
+      get:
+        tags:
+        - name
+        summary: Search by country name
+        description: Search by country name. It can be the native name or partial name
+        operationId: getCountriesByName
+        parameters:
+        - name: name
+          in: path
+          description: native name or partial name
+          required: true
+          schema:
+            type: string
+        responses:
+          '200':
+            description: successful operation
+          '400':
+            description: Invalid name supplied
+          '404':
+            description: Country not found
+        x-wso2-request-interceptor: validateRequest
+        x-wso2-response-interceptor: validateResponseLength
+        x-wso2-disable-security: true
+        x-wso2-production-endpoints: "#/x-wso2-endpoints/countriesName"
+x-wso2-endpoints:
+ - countriesAll:
+    urls:
+    - https://restcountries.eu/rest/v2/all
+ - countriesName:
+    urls:
+    - https://restcountries.eu/rest/v2/name/

@@ -1,0 +1,34 @@
+---
+openapi: 3.0.0
+info:
+  description: 'This is a simple api definitions'
+  version: 1.0
+  title: Customer API
+  contact:
+    email: fabio@wso2.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+tags:
+- name: customer
+  description: Everything about your customers available in your cloud
+  externalDocs:
+    description: Find out more
+    url: http://mocky.io
+x-wso2-basePath: /customer/v1
+paths:
+  "/list":
+    get:
+      tags:
+      - list-customer
+      summary: Get the list of available customers
+      operationId: list-customers
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: invalid status value
+      x-wso2-production-endpoints:
+        urls:
+          #- <add-your-endpoint-api>
+      #x-wso2-disable-security: true
